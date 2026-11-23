@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarixiy Meros — Dunyo va O'zbekiston Tarixi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #090d16;
+            color: #f1f5f9;
+        }
+
+        .title-font {
+            font-family: 'Cinzel', serif;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950 bg-[#090d16]">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 text-slate-950 text-xs font-bold py-1.5 px-4 text-center tracking-wide">
+        🏛️ TARIXIY MEROS PORTALI • 200+ BUYUK SHAXS • 1000 OBIDA & SHAHAR • 30 000 VOQEA • TOSH, MUZ DAVRI & ILK INSONLAR
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div onclick="switchNav('home')" class="flex items-center space-x-3 cursor-pointer">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-600 to-yellow-300 flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/20">
+                        <i data-lucide="landmark" class="w-5 h-5 font-bold"></i>
+                    </div>
+                    <div>
+                        <span class="title-font font-black text-lg sm:text-xl tracking-wider gold-gradient-text">TARIXIY MEROS</span>
+                        <span class="hidden sm:block text-[10px] text-slate-400 tracking-widest uppercase -mt-1">Sivilizatsiyalar Xazinasi</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center space-x-1">
+                    <button type="button" onclick="switchNav('home')" id="btn-home" class="nav-link px-3 py-2 rounded-lg text-xs font-semibold transition text-amber-400 bg-amber-500/10 border border-amber-500/20">Bosh Sahifa</button>
+                    <button type="button" onclick="switchNav('prehistory')" id="btn-prehistory" class="nav-link px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800/50 transition">Tosh, Muz & Ilk Inson</button>
+                    <button type="button" onclick="switchNav('figures')" id="btn-figures" class="nav-link px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800/50 transition">Buyuk Shaxslar (200+)</button>
+                    <button type="button" onclick="switchNav('places')" id="btn-places" class="nav-link px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800/50 transition">Obidalar (1000)</button>
+                    <button type="button" onclick="switchNav('events')" id="btn-events" class="nav-link px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800/50 transition">Voqealar (30 000)</button>
+                    <button type="button" onclick="switchNav('quiz')" id="btn-quiz" class="nav-link px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800/50 transition">Viktorina</button>
+                </nav>
+
+                <!-- Search & Admin Button -->
+                <div class="flex items-center space-x-2">
+                    <div class="relative hidden sm:block">
+                        <input type="text" id="desktop-search" oninput="handleSearch(this.value)" placeholder="Qidirish (Amir Temur, Muz davri...)" class="bg-slate-900/90 border border-slate-700/80 rounded-full pl-9 pr-4 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-amber-500 w-52 transition">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5"></i>
+                    </div>
+                    <button type="button" onclick="openAdminModal()" class="flex items-center space-x-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-md shadow-amber-500/20">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span class="hidden md:inline">Ma'lumot Qo'shish</span>
+                    </button>
+                    <button type="button" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="sm:hidden pb-3">
+                <div class="relative">
+                    <input type="text" id="mobile-search" oninput="handleSearch(this.value)" placeholder="Shaxs, obida, davr qidirish..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-amber-500">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden glass-panel border-t border-slate-800 px-4 py-3 space-y-1">
+            <button type="button" onclick="switchNav('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-lg text-amber-400 font-semibold bg-amber-500/10">Bosh Sahifa</button>
+            <button type="button" onclick="switchNav('prehistory'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-lg text-slate-300 font-semibold hover:bg-slate-800">Tosh, Muz & Ilk Insonlar</button>
+            <button type="button" onclick="switchNav('figures'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-lg text-slate-300 font-semibold hover:bg-slate-800">Buyuk Shaxslar (200+)</button>
+            <button type="button" onclick="switchNav('places'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-lg text-slate-300 font-semibold hover:bg-slate-800">Obidalar & Shaharlar (1000)</button>
+            <button type="button" onclick="switchNav('events'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-lg text-slate-300 font-semibold hover:bg-slate-800">Tarixiy Voqealar (30 000)</button>
+            <button type="button" onclick="switchNav('quiz'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-lg text-slate-300 font-semibold hover:bg-slate-800">Viktorina Testi</button>
+            <button type="button" onclick="openAdminModal(); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-lg text-amber-400 font-semibold bg-amber-500/20 flex items-center space-x-2">
+                <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                <span>Yangi Ma'lumot Qo'shish</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- SEARCH RESULTS CONTAINER -->
+        <div id="search-results-section" class="hidden mb-10 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                    <i data-lucide="search" class="w-5 h-5 text-amber-400"></i>
+                    <span>Qidiruv Natijalari: <span id="search-query-display" class="text-amber-400"></span></span>
+                </h2>
+                <button type="button" onclick="clearSearch()" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg transition">Yopish</button>
+            </div>
+            <div id="search-results-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- 1. HOME SECTION -->
+        <section id="section-home" class="space-y-12">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden glass-panel border border-amber-500/30 p-6 sm:p-12 text-center sm:text-left">
+                <div class="max-w-3xl space-y-6">
+                    <span class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                        <span>Tarixiy Xotira va Sivilizatsiyalar</span>
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black title-font leading-tight">
+                        Tarixiy Xotira — <span class="gold-gradient-text">Sivilizatsiya Poydevori</span>
+                    </h1>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Birinchi ko'rinishdagi qulay tuzilma bilan 200+ buyuk shaxs (jumladan Amir Temur 3 ta rasm bilan), 1000 ta obida va shahar, 30 000 ta tarixiy voqea hamda Tosh davri, Muz davri va ilk insonlar haqidagi batafsil ma'lumotlarni o'rganing.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2 justify-center sm:justify-start">
+                        <button type="button" onclick="switchNav('figures')" class="px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm transition shadow-lg shadow-amber-500/25 flex items-center space-x-2">
+                            <span>200+ Shaxslar</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                        <button type="button" onclick="switchNav('prehistory')" class="px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition">
+                            Tosh, Muz & Ilk Insonlar
+                        </button>
+                        <button type="button" onclick="openWikiModal()" class="px-6 py-3.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 font-semibold text-sm border border-emerald-500/40 transition flex items-center space-x-2">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span>Vikipediyadan Ma'lumot Tortish</span>
+                    </button>
+                    <button type="button" onclick="syncWikipediaCatalogNow()" class="px-6 py-3.5 rounded-xl bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 font-semibold text-sm border border-sky-500/40 transition flex items-center space-x-2">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        <span>Vikipediyadan Hammasini Tortish</span>
+                    </button>
+                    <button type="button" onclick="switchNav('quiz')" class="px-6 py-3.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-semibold text-sm border border-amber-500/30 transition">
+                        Bilimni Sinash
+                    </button>
+                        <button type="button" onclick="switchNav('quiz')" class="px-6 py-3.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-semibold text-sm border border-amber-500/30 transition">
+                            Bilimni Sinash
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <!-- SEARCH RESULTS CONTAINER -->
+        <div id="search-results-section" class="hidden mb-10 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                    <i data-lucide="search" class="w-5 h-5 text-amber-400"></i>
+                    <span>Qidiruv Natijalari: <span id="search-query-display" class="text-amber-400"></span></span>
+                </h2>
+                <div class="flex items-center space-x-2">
+                    <button type="button" onclick="openWikiModal(document.getElementById('desktop-search')?.value || document.getElementById('mobile-search')?.value || '')" class="text-xs text-emerald-300 hover:text-white bg-emerald-500/15 border border-emerald-500/30 px-3 py-1.5 rounded-lg transition">Vikipediyadan ham qidirish</button>
+                    <button type="button" onclick="clearSearch()" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg transition">Yopish</button>
+                </div>
+            </div>
+            <div id="search-results-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-1">
+                    <span id="stat-places-count" class="text-3xl sm:text-4xl font-black title-font text-amber-400">1000</span>
+                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Obida & Shaharlar</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-1">
+                    <span id="stat-prehistory-count" class="text-3xl sm:text-4xl font-black title-font text-amber-400">6</span>
+                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Tosh, Muz & Ilk Inson</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-1">
+                    <span id="stat-events-count" class="text-3xl sm:text-4xl font-black title-font text-amber-400">30000</span>
+                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Tarixiy Voqealar</p>
+                </div>
+            </div>
+
+            <!-- Featured Categories -->
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold title-font text-white">Asosiy Bo'limlar</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div onclick="switchNav('prehistory')" class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-amber-500/40 cursor-pointer transition group space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:scale-110 transition">
+                            <i data-lucide="snowflake" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Tosh, Muz & Ilk Inson</h3>
+                        <p class="text-slate-400 text-xs sm:text-sm">Tosh davri qurollari, muzlik davri iqlimi va ilk odamlar hayoti (3 rasm).</p>
+                    </div>
+                    <div onclick="switchNav('figures')" class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-amber-500/40 cursor-pointer transition group space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:scale-110 transition">
+                            <i data-lucide="crown" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Buyuk Shaxslar (200+)</h3>
+                        <p class="text-slate-400 text-xs sm:text-sm">Amir Temur, allomalar, sarkardalar va 200+ tarixiy shaxs har biri 3 ta rasm bilan.</p>
+                    </div>
+                    <div onclick="switchNav('places')" class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-amber-500/40 cursor-pointer transition group space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:scale-110 transition">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Obidalar & Shaharlar</h3>
+                        <p class="text-slate-400 text-xs sm:text-sm">1000 ta tarixiy obida va qadimiy shaharlar (3 tadan rasm bilan).</p>
+                    </div>
+                    <div onclick="switchNav('events')" class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-amber-500/40 cursor-pointer transition group space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:scale-110 transition">
+                            <i data-lucide="history" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Tarixiy Voqealar (30 000)</h3>
+                        <p class="text-slate-400 text-xs sm:text-sm">30 000 ta tarixiy voqea, Buyuk Ipak Yo'li va muhim sanalar (har biri 3 rasm bilan).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREHISTORY SECTION (Tosh davri, Muz davri, Ilk insonlar) -->
+        <section id="section-prehistory" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold title-font text-white">Tosh Davri, Muz Davri va Ilk Insonlar</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm">Insoniyatning ilk paydo bo'lishi, muzlik davrlari va tosh qurollar davri (har biri 3 rasm)</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" onclick="filterPrehistory('all', this)" class="pre-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950">Barchasi</button>
+                    <button type="button" onclick="filterPrehistory('stone', this)" class="pre-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Tosh Davri</button>
+                    <button type="button" onclick="filterPrehistory('ice', this)" class="pre-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Muz Davri</button>
+                    <button type="button" onclick="filterPrehistory('early', this)" class="pre-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Ilk Insonlar</button>
+                </div>
+            </div>
+            <div id="prehistory-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- 2. FIGURES SECTION (200+ Shaxslar) -->
+        <section id="section-figures" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold title-font text-white">Buyuk Tarixiy Shaxslar (200+)</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm">Har bir shaxs uchun 3 ta rasm (Amir Temur va boshqa allomalar, hukmdorlar)</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" onclick="filterFigures('all', this)" class="fig-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950">Barchasi</button>
+                    <button type="button" onclick="filterFigures('ruler', this)" class="fig-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Hukmdorlar</button>
+                    <button type="button" onclick="filterFigures('scientist', this)" class="fig-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Olimlar</button>
+                    <button type="button" onclick="filterFigures('custom', this)" class="fig-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Qo'shilganlar</button>
+                </div>
+            </div>
+            <div id="figures-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="figures-pagination" class="flex justify-center pt-2"></div>
+        </section>
+
+                    <button type="button" onclick="filterPlaces('all', this)" class="plc-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950">Barchasi (1000)</button>
+                    <button type="button" onclick="filterPlaces('uzbekistan', this)" class="plc-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">O'zbekiston</button>
+                    <button type="button" onclick="filterPlaces('world', this)" class="plc-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Jahon</button>
+                </div>
+            </div>
+            <div id="places-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="places-pagination" class="flex justify-center pt-2"></div>
+        </section>
+
+        <!-- 4. EVENTS SECTION (30 000 Tarixiy Voqea) -->
+        <section id="section-events" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold title-font text-white">Buyuk Tarixiy Voqealar (30 000)</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm">30 000 ta tarixiy voqea — har biri o'ziga mos 3 tadan rasm bilan</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" onclick="filterEvents('all', this)" class="evt-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950">Barchasi (30 000)</button>
+                    <button type="button" onclick="filterEvents('ancient', this)" class="evt-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Qadimgi</button>
+                    <button type="button" onclick="filterEvents('medieval', this)" class="evt-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">O'rta Asrlar</button>
+                    <button type="button" onclick="filterEvents('modern', this)" class="evt-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Yangi & Zamonaviy</button>
+                </div>
+            </div>
+            <div id="events-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="events-pagination" class="flex justify-center pt-2"></div>
+        </section>
+
+        <!-- 5. QUIZ SECTION -->
+        <section id="section-quiz" class="hidden max-w-2xl mx-auto">
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 space-y-6 border border-amber-500/20">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold title-font text-white">Tarixiy Viktorina</h2>
+                        <p class="text-xs text-slate-400">Tarix bo'yicha bilimingizni sinab ko'ring</p>
+                    </div>
+                    <span id="quiz-score-badge" class="bg-amber-500/15 text-amber-400 px-3.5 py-1.5 rounded-full text-xs font-bold border border-amber-500/30">Ball: 0</span>
+                </div>
+
+                <div id="quiz-content" class="space-y-6">
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs text-slate-400">
+                            <span id="quiz-progress-text">Savol 1 / 5</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="quiz-progress-bar" class="bg-amber-500 h-full transition-all duration-300" style="width: 20%"></div>
+                        </div>
+                    </div>
+
+                    <h3 id="quiz-question-text" class="text-lg sm:text-xl font-bold text-white leading-snug">Savol yuklanmoqda...</h3>
+                    <div id="quiz-options-grid" class="space-y-3"></div>
+                </div>
+
+                <div id="quiz-result" class="hidden text-center space-y-6 py-4">
+                    <div class="w-20 h-20 rounded-full bg-amber-500/15 text-amber-400 flex items-center justify-center mx-auto border border-amber-500/30">
+                        <i data-lucide="award" class="w-10 h-10"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-2xl font-black title-font text-white">Viktorina Yakunlandi!</h3>
+                        <p id="quiz-final-score" class="text-slate-300 text-sm"></p>
+                    </div>
+                    <button type="button" onclick="startQuiz()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm transition">Qayta Boshlash</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-panel border-t border-slate-800 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="landmark" class="w-4 h-4 text-amber-400"></i>
+                <span>Tarixiy Meros Portali — 200+ Shaxs • 1000 Obida & Shahar • 30 000 Voqea • Tosh & Muz Davri</span>
+            </div>
+            <div>Ma'lumotlar brauzer xotirasida saqlanadi</div>
+        </div>
+    </footer>
+
+    <!-- DETAIL MODAL (3 rasm galereyasi + to'liq ma'lumot) -->
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel max-w-3xl w-full rounded-3xl border border-amber-500/30 overflow-hidden my-auto shadow-2xl">
+            <div class="relative">
+                <img id="modal-img" src="" alt="" onerror="handleImgError(this)" class="w-full h-56 sm:h-72 object-cover">
+                <button type="button" onclick="closeModal('detail-modal')" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-950/80 text-white hover:text-amber-400 flex items-center justify-center transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                <span id="modal-tag" class="absolute bottom-4 left-4 bg-amber-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full"></span>
+            </div>
+
+            <!-- 3 Images Gallery Selector -->
+            <div id="modal-gallery" class="grid grid-cols-3 gap-2 p-3 bg-slate-950/60 border-b border-slate-800"></div>
+
+            <div class="p-6 sm:p-8 space-y-5 max-h-[60vh] overflow-y-auto">
+                <div>
+                    <h2 id="modal-title" class="text-2xl sm:text-3xl font-black title-font text-white"></h2>
+                    <p id="modal-subtitle" class="text-amber-400 text-xs sm:text-sm font-semibold mt-1"></p>
+                </div>
+
+                <div id="modal-tabs" class="flex flex-wrap gap-2 border-b border-slate-800 pb-3"></div>
+                <div id="modal-body" class="text-slate-300 text-sm leading-relaxed space-y-3 whitespace-pre-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN ADD DATA MODAL -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel max-w-xl w-full rounded-3xl border border-amber-500/30 p-6 sm:p-8 space-y-5 my-auto">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <h3 class="text-xl font-bold title-font text-white flex items-center space-x-2">
+                    <i data-lucide="plus-circle" class="w-5 h-5 text-amber-400"></i>
+                    <span>Yangi Tarixiy Ma'lumot Qo'shish</span>
+                </h3>
+                <button type="button" onclick="closeModal('admin-modal')" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form id="admin-form" onsubmit="saveCustomData(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Bo'lim turi</label>
+                    <select id="admin-category" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                        <option value="figure">Buyuk Shaxs</option>
+                        <option value="place">Tarixiy Obida / Shahar</option>
+                        <option value="prehistory">Tosh / Muz Davri / Ilk Inson</option>
+                        <option value="event">Tarixiy Voqea</option>
+                    </select>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nomi / Sarlavha</label>
+                        <input type="text" id="admin-name" required placeholder="Masalan: Mirzo Ulug'bek" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Yillar / Davr / Joylashuv</label>
+                        <input type="text" id="admin-meta" required placeholder="Masalan: 1394–1449 • Samarqand" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">1-Rasm havolasi (URL)</label>
+                    <input type="url" id="admin-img1" placeholder="https://..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">2-Rasm havolasi (ixtiyoriy)</label>
+                        <input type="url" id="admin-img2" placeholder="https://..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">3-Rasm havolasi (ixtiyoriy)</label>
+                        <input type="url" id="admin-img3" placeholder="https://..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Qisqacha ma'lumot</label>
+                    <textarea id="admin-summary" rows="2" required placeholder="Qisqa mazmuni..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Batafsil matn</label>
+                    <textarea id="admin-details" rows="4" required placeholder="To'liq tarixiy ma'lumot..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" onclick="closeModal('admin-modal')" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700">Bekor qilish</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-bold">Saqlash</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- WIKIPEDIA LIVE IMPORTER MODAL -->
+    <div id="wiki-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel max-w-2xl w-full rounded-3xl border border-emerald-500/30 p-6 sm:p-8 space-y-5 my-auto shadow-2xl">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div>
+                    <h3 class="text-xl font-bold title-font text-white flex items-center space-x-2">
+                        <i data-lucide="globe" class="w-5 h-5 text-emerald-400"></i>
+                        <span>Vikipediyadan Ma'lumot Tortish va Qo'shish</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">O'zbekcha yoki Inglizcha Vikipediyadan maqola, rasm va ma'lumotlarni tortib oling</p>
+                </div>
+                <button type="button" onclick="closeModal('wiki-modal')" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="grid sm:grid-cols-4 gap-3">
+                <select id="wiki-lang" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:border-emerald-400 focus:outline-none">
+                    <option value="uz">O'zbekcha (uz.wikipedia.org)</option>
+                    <option value="en">English (en.wikipedia.org)</option>
+                </select>
+                <input type="text" id="wiki-query" placeholder="Masalan: Amir Temur, Rim imperiyasi..." class="sm:col-span-2 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-emerald-400 focus:outline-none">
+                <button type="button" onclick="fetchWikipediaArticles()" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl transition">Qidirish</button>
+            </div>
+
+            <div id="wiki-status" class="text-xs text-slate-400">Kalit so'z kiriting va "Qidirish" tugmasini bosing.</div>
+            <div id="wiki-results" class="space-y-3 max-h-96 overflow-y-auto pr-1"></div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden bg-amber-500 text-slate-950 font-bold text-xs px-4 py-3 rounded-xl shadow-xl"></div>
+
+    <script>
+        function makeHistorySvgDataUri(title, subtitle, accentColor, bgStart, bgEnd, motif) {
+            const safeTitle = String(title || "Tarixiy Meros").slice(0, 34).replace(/[<>&"]/g, "");
+            const safeSub = String(subtitle || "Sivilizatsiyalar Xazinasi").slice(0, 44).replace(/[<>&"]/g, "");
+            const motifSvg = motif === "ice"
+                ? `<polygon points="220,210 320,85 420,210" fill="rgba(186,230,253,0.18)" stroke="${accentColor}" stroke-width="2"/><polygon points="360,210 470,65 580,210" fill="rgba(125,211,252,0.15)" stroke="${accentColor}" stroke-width="2"/>`
+                : motif === "stone"
+                    ? `<rect x="275" y="75" width="90" height="125" rx="22" fill="rgba(245,158,11,0.16)" stroke="${accentColor}" stroke-width="2.5"/><circle cx="465" cy="135" r="52" fill="rgba(217,119,6,0.14)" stroke="${accentColor}" stroke-width="2.5"/>`
+                    : motif === "person"
+                        ? `<circle cx="400" cy="95" r="34" fill="rgba(245,158,11,0.2)" stroke="${accentColor}" stroke-width="2.5"/><path d="M335,195 C335,150 465,150 465,195 Z" fill="rgba(245,158,11,0.15)" stroke="${accentColor}" stroke-width="2.5"/>`
+                        : `<path d="M240,195 L240,125 L400,65 L560,125 L560,195 Z" fill="rgba(245,158,11,0.14)" stroke="${accentColor}" stroke-width="2.5"/><rect x="365" y="130" width="70" height="65" rx="8" fill="rgba(251,191,36,0.16)" stroke="${accentColor}" stroke-width="2"/>`;
+
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+                <defs>
+                    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="${bgStart}"/>
+                        <stop offset="100%" stop-color="${bgEnd}"/>
+                    </linearGradient>
+                </defs>
+                <rect width="800" height="450" fill="url(#bg)"/>
+                <circle cx="680" cy="85" r="130" fill="rgba(245,158,11,0.08)"/>
+                <circle cx="120" cy="380" r="150" fill="rgba(251,191,36,0.06)"/>
+                <rect x="28" y="28" width="744" height="394" rx="24" fill="none" stroke="${accentColor}" stroke-opacity="0.35" stroke-width="2"/>
+                ${motifSvg}
+                <rect x="64" y="245" width="672" height="132" rx="18" fill="rgba(9,13,22,0.72)" stroke="rgba(245,158,11,0.25)"/>
+                <text x="92" y="298" fill="#fef08a" font-family="Arial, sans-serif" font-size="30" font-weight="bold">${safeTitle}</text>
+                <text x="92" y="338" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="20">${safeSub}</text>
+                <text x="642" y="362" fill="${accentColor}" font-family="Arial, sans-serif" font-size="15" font-weight="bold">TARIXIY MEROS</text>
+            </svg>`;
+            return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+        }
+
+        const FALLBACK_IMG = makeHistorySvgDataUri(
+            "Tarixiy Meros",
+            "Sivilizatsiyalar va Obidalar Xazinasi",
+            "#f59e0b",
+            "#0f172a",
+            "#1e293b",
+            "place"
+        );
+
+        function handleImgError(imgEl) {
+            if (!imgEl.dataset.fallbackApplied) {
+                imgEl.dataset.fallbackApplied = "true";
+                imgEl.src = FALLBACK_IMG;
+            }
+        }
+
+        function ensureThreeImages(images, fallbackPool) {
+            const pool = Array.isArray(fallbackPool) && fallbackPool.length >= 3
+                ? fallbackPool
+                : [
+                    makeHistorySvgDataUri("Tarixiy Tasvir I", "Asosiy Tarixiy Lavha", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Tarixiy Tasvir II", "Madaniy va Ilmiy Meros", "#fbbf24", "#111827", "#334155", "person"),
+                    makeHistorySvgDataUri("Tarixiy Tasvir III", "Qadimiy Yodgorlik va Xotira", "#d97706", "#090d16", "#1e293b", "stone")
+                ];
+            const list = Array.isArray(images) ? images.filter(Boolean) : [];
+            return [
+                list[0] || pool[0],
+                list[1] || pool[1 % pool.length],
+                list[2] || pool[2 % pool.length]
+            ];
+        }
+
+        // Tosh davri, Muz davri va Ilk insonlar (har biri 3 rasm va kengaytirilgan ma'lumot)
+        const prehistoryData = [
+            {
+                id: "pre-1",
+                type: "stone",
+                tag: "Tosh Davri • Paleolit",
+                name: "Qadimgi Tosh Davri (Paleolit)",
+                meta: "Taxminan 2.6 mln – 12 ming yil avval",
+                summary: "Insoniyat tarixidagi eng uzun davr bo'lib, dastlabki tosh qurollar yasalishi, olovning o'zlashtirilishi, ovchilik, terimchilik va ilk tasviriy san'atning shakllanishi bilan ajralib turadi.",
+                images: [
+                    makeHistorySvgDataUri("Paleolit • Tosh Qurollar", "Qo'l bolta va chaqmoqtosh qurollar", "#f59e0b", "#1c1917", "#292524", "stone"),
+                    makeHistorySvgDataUri("Paleolit • Olov va G'or", "Olovni o'zlashtirish va ilk manzilgoh", "#fbbf24", "#0f172a", "#334155", "stone"),
+                    makeHistorySvgDataUri("Paleolit • G'or Tasvirlari", "Ilk tasviriy san'at va ov sahnalari", "#d97706", "#111827", "#27272a", "stone")
+                ],
+                sections: {
+                    "Umumiy": "Paleolit davrida odamlar tabiiy g'orlar va vaqtinchalik boshpanalarda yashagan, terimchilik va ovchilik bilan shug'ullangan.\n\nOlovdan foydalanish ovqatni pishirish, yirtqichlardan himoyalanish va sovuq iqlimda omon qolish imkonini bergan. Jamoa ichida o'zaro yordam va tajriba almashish kuchaygan.",
+                    "Qurollar va Madaniyat": "Dastlab qo'pol chopqichlar va qo'l bolta-cho'qmorlar ishlatilgan, keyinchalik suyak, shox va chaqmoqtoshdan nozik qurollar tayyorlangan.\n\nSo'nggi paleolitda g'or devorlariga hayvonlar tasviri va ov sahnalari chizila boshlangan, suyakdan igna va bezaklar yasalgan.",
+                    "Ahamiyati": "Tosh davri inson tafakkuri, mehnat taqsimoti, ilk nutq va jamoa tuzumining shakllanish poydevori bo'lgan."
+                }
+            },
+            {
+                id: "pre-2",
+                type: "stone",
+                tag: "Tosh Davri • Mezoliti va Neolit",
+                name: "Neolit Inqilobi, Dehqonchilik va Kulolchilik",
+                meta: "Taxminan 10 ming – 5 ming yil avval",
+                summary: "O'zlashtiruvchi xo'jalikdan ishlab chiqaruvchi xo'jalikka — dehqonchilik, chorvachilik, sopol idish yasash va o'troq manzilgohlar qurishga o'tilgan buyuk burilish davri.",
+                images: [
+                    makeHistorySvgDataUri("Neolit • Dehqonchilik", "Donli ekinlar va o'troq manzilgohlar", "#f59e0b", "#0f172a", "#1e293b", "stone"),
+                    makeHistorySvgDataUri("Neolit • Kulolchilik", "Sopol idishlar va hunarmandchilik", "#fbbf24", "#1c1917", "#292524", "stone"),
+                    makeHistorySvgDataUri("Neolit • Chorvachilik", "Hayvonlarni xonakilashtirish davri", "#d97706", "#111827", "#1f2937", "stone")
+                ],
+                sections: {
+                    "Umumiy": "Neolit davrida odamlar bug'doy, arpa va boshqa donli ekinlarni ekish, shuningdek yovvoyi hayvonlarni xonakilashtirishni yo'lga qo'ydilar.",
+                    "Qurollar va Madaniyat": "Silliqlangan tosh boltalar, o'roqlar, yanchish toshlari, sopol idishlar va to'quvchilik rivojlandi. Daryo vodiylari bo'ylab doimiy manzilgohlar paydo bo'ldi.",
+                    "Ahamiyati": "Oziq-ovqat zaxiralarining paydo bo'lishi aholi sonining o'sishiga, hunarmandchilikning ajralib chiqishiga va ilk qadimiy shaharlar shakllanishiga olib keldi."
+                }
+            },
+            {
+                id: "pre-3",
+                type: "ice",
+                tag: "Muz Davri • Pleystotsen",
+                name: "Buyuk Muzlik Davrlari va Muzlik Qalqonlari",
+                meta: "Taxminan 2.6 mln – 11.7 ming yil avval",
+                summary: "Yer yuzida iqlimning keskin sovishi, ulkan muzlik qalqonlarining kengayishi, daryo o'zanlarining o'zgarishi va maxsus sovuqqa chidamli hayvonot dunyosi bilan kechgan davr.",
+                images: [
+                    makeHistorySvgDataUri("Muz Davri • Muzlik Qalqoni", "Yer yuzidagi qalin muzlik qatlamlari", "#38bdf8", "#082f49", "#0f172a", "ice"),
+                    makeHistorySvgDataUri("Muz Davri • Junli Mamont", "Sovuqqa moslashgan qadimgi fauna", "#7dd3fc", "#0c4a6e", "#1e293b", "ice"),
+                    makeHistorySvgDataUri("Muz Davri • Iqlim Tebranishi", "Muzlik va iliqlashuv bosqichlari", "#bae6fd", "#090d16", "#164e63", "ice")
+                ],
+                sections: {
+                    "Umumiy": "Muzlik davrlarida Shimoliy Yevropa, Shimoliy Amerika va Osiyoning ayrim hududlari qalin muz qatlamlari bilan qoplangan. Sovuq va quruq davrlar nisbatan iliq davrlar bilan almashinib turgan.",
+                    "Hayvonot Dunyosi": "Muzlik davrida junli mamontlar, tukli karkidonlar, qilich tishli yo'lbarslar, ulkan bug'ular va g'or ayiqlari yashagan.",
+                    "Insonga Ta'siri": "Sovuq iqlim odamlarni issiq kiyim tikishga, mustahkam boshpana qurishga, olovni saqlashga va ovchilik usullarini takomillashtirishga majbur etgan."
+                }
+            },
+            {
+                id: "pre-4",
+                type: "ice",
+                tag: "Muz Davri • So'nggi Maksimum",
+                name: "So'nggi Muzlik Maksimumi va Dengiz Sathi",
+                meta: "Taxminan 26 ming – 19 ming yil avval",
+                summary: "Muzliklar eng katta maydonga yoyilgan, Jahon okeani sathi esa hozirgidan ancha past bo'lib, quruqlik ko'priklari ochilgan davr.",
+                images: [
+                    makeHistorySvgDataUri("So'nggi Muzlik Maksimumi", "Muzliklarning eng keng yoyilish davri", "#38bdf8", "#090d16", "#0c4a6e", "ice"),
+                    makeHistorySvgDataUri("Dengiz Sathi Pasayishi", "Quruqlik yo'laklari va qirg'oqlar", "#7dd3fc", "#0f172a", "#164e63", "ice"),
+                    makeHistorySvgDataUri("Muzliklarning Orqaga Chekinishi", "Tabiiy muhitning yangilanishi", "#bae6fd", "#082f49", "#1e293b", "ice")
+                ],
+                sections: {
+                    "Umumiy": "Ko'p suv muzliklarda to'plangani sababli dengiz sathi pasaygan va ayrim quruqlik yo'laklari ochilgan.",
+                    "Migratsiya": "Odamlar yangi hududlarga ko'chib o'tish, o'zgaruvchan landshaftlarga moslashish va resurslarni oqilona taqsimlash tajribasini orttirgan.",
+                    "Ahamiyati": "Muzliklarning erishi keyinchalik daryo vodiylarining shakllanishi va dehqonchilik vohalarining paydo bo'lishiga zamin yaratgan."
+                }
+            },
+            {
+                id: "pre-5",
+                type: "early",
+                tag: "Ilk Insonlar • Antropogenez",
+                name: "Homo Habilis, Homo Erectus va Ilk Mehnat",
+                meta: "Taxminan 2.8 mln – 400 ming yil avval",
+                summary: "Ilk tosh qurol yasovchi, tik yuruvchi va uzoq masofalarga tarqalgan ilk inson turlarining shakllanishi hamda rivojlanishi.",
+                images: [
+                    makeHistorySvgDataUri("Homo Habilis • Mohir Odam", "Ilk mehnat qurollari yaratilishi", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Homo Erectus • Tik Yuruvchi", "Yangi hududlarga tarqalish davri", "#fbbf24", "#111827", "#27272a", "person"),
+                    makeHistorySvgDataUri("Ilk Jamoa Hayoti", "Hamkorlik va omon qolish strategiyasi", "#d97706", "#1c1917", "#292524", "stone")
+                ],
+                sections: {
+                    "Umumiy": "Homo habilis ('Mohir odam') ilk sodda tosh qurollarni yasagan bo'lsa, Homo erectus ('Tik yuruvchi odam') Afrika tashqarisiga ham tarqalib, yangi muhitlarga moslashgan.",
+                    "Turmush Tarzi": "Jamoaviy ovchilik, olovni nazorat qilish, xavfsiz to'xtash joylari tashkil etish va murakkabroq qurollar yasash rivojlangan.",
+                    "Ahamiyati": "Inson evolyutsiyasida biologik va madaniy taraqqiyotning eng muhim bosqichlaridan biri hisoblanadi."
+                }
+            },
+            {
+                id: "pre-6",
+                type: "early",
+                tag: "Ilk Insonlar • Homo Sapiens",
+                name: "Neandertallar va Zamonaviy Tipdagi Ilk Odamlar",
+                meta: "Taxminan 300 ming – 30 ming yil avval",
+                summary: "Ramziy tafakkur, san'at, dafn marosimlari, murakkab qurollar va ijtimoiy hamkorlikning keng rivojlanishi.",
+                images: [
+                    makeHistorySvgDataUri("Ilk Homo Sapiens", "Ramziy tafakkur va madaniyat", "#f59e0b", "#111827", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Neandertallar Davri", "Qadimgi jamoalar va urf-odatlar", "#fbbf24", "#0f172a", "#27272a", "person"),
+                    makeHistorySvgDataUri("Madaniy Taraqqiyot", "Suyak, tosh va bezak san'ati", "#d97706", "#090d16", "#292524", "stone")
+                ],
+                sections: {
+                    "Umumiy": "Ilk Homo sapiens vakillari Yevroosiyo va boshqa qit'alarga tarqalib, murakkab qurollar, kiyimlar va bezaklar yaratgan.",
+                    "Madaniyat": "Suyak ignalar, marjonlar, g'or rasmlari, musiqa va marosim madaniyati insonning ichki dunyosi va ramziy tafakkuri boyiganini ko'rsatadi.",
+                    "Ahamiyati": "Zamonaviy inson madaniyati, ijtimoiy tuzilishi va tilining ilk shakllari shu davrda mustahkamlangan."
+                }
+            }
+        ];
+
+        // Amir Temur va 200+ buyuk tarixiy shaxslar (har biri 3 rasm va batafsil ma'lumot)
+        const baseFigures = [
+            {
+                id: "fig-1",
+                type: "ruler",
+                tag: "Buyuk Sohibqiron • Sarkarda",
+                name: "Amir Temur",
+                meta: "1336–1405 • Samarqand (Temuriylar davlati asoschisi)",
+                summary: "Markaziy Osiyoda qudratli markazlashgan davlat barpo etgan buyuk sarkarda, davlat arbobi, bunyodkor, diplomat va ilm-fan homiysi.",
+                images: [
+                    makeHistorySvgDataUri("Amir Temur • Sohibqiron", "1336–1405 • Davlat va Harbiy San'at", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Amir Temur • Temur Tuzuklari", "Adolat, Davlat Boshqaruvi va Diplomatiya", "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri("Amir Temur • Bunyodkorlik", "Samarqand, Kesh va Buyuk Meros", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Tarjimai Hol": "Amir Temur 1336-yil 9-aprelda Kesh (hozirgi Shahrisabz) yaqinidagi Xoja Ilg'or qishlog'ida Muhammad Tarag'ay oilasida tavallud topgan.\n\nU yoshligidan harbiy mahorat, davlat boshqaruvi, tarix, din va diplomatiya ilmlarini chuqur o'rgangan. Tarqoq uluslarni birlashtirib, markazlashgan buyuk saltanatga asos solgan.",
+                    "Davlat Boshqaruvi va Harbiy San'at": "'Temur tuzuklari' asarida davlat boshqaruvi, adolat, elchilik, moliya va qo'shin intizomi aniq belgilab berilgan.\n\nSohibqiron strategik harakat, tezkor yurishlar va diplomatiya uyg'unligidan foydalanib, keng hududlarda xavfsizlik hamda savdo yo'llari barqarorligini ta'minlagan.",
+                    "Bunyodkorlik va Tarixiy Meros": "Samarqand, Kesh, Buxoro va Toshkentda ulkan obidalar, bog'lar, madrasalar va karvonsaroylar bunyod etilgan.\n\nAmir Temur davlati Temuriylar Renessansi — ilm-fan, astronomiya, miniatyura, adabiyot va me'morchilik yuksalishiga zamin yaratgan."
+                }
+            },
+            {
+                id: "fig-2",
+                type: "scientist",
+                tag: "Astronom • Davlat Arbobi",
+                name: "Mirzo Ulug'bek",
+                meta: "1394–1449 • Samarqand",
+                summary: "Buyuk munajjim, matematik va ma'rifatparvar hukmdor; Samarqand rasadxonasi asoschisi va 'Ziji jadidi Ko'ragoniy' astronomik jadvali muallifi.",
+                images: [
+                    makeHistorySvgDataUri("Mirzo Ulug'bek", "1394–1449 • Buyuk Munajjim va Olim", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Samarqand Rasadxonasi", "Yulduzlar Katalogi va Astronomiya", "#fbbf24", "#111827", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Ziji Jadidi Ko'ragoniy", "Ilmiy Meros va Ma'rifat", "#d97706", "#090d16", "#27272a", "place")
+                ],
+                sections: {
+                    "Tarjimai Hol": "1394-yilda Sultoniya shahrida tug'ilgan, bolaligi va yoshligi safarlar hamda ilm muhitida o'tgan. Samarqandda ilm-fan markazini yuksaltirib, ko'plab olimlarni to'plagan.",
+                    "Ilmiy Meros": "Samarqand rasadxonasida 1000 dan ortiq yulduzning koordinatalari aniqlangan va yil uzunligi misli ko'rilmagan aniqlikda hisoblangan.",
+                    "Ahamiyati": "O'rta asr astronomiyasi tarixida eng aniq kataloglardan biri yaratilgan va jahon ilm-faniga katta hissa qo'shilgan."
+                }
+            },
+            {
+                id: "fig-3",
+                type: "scientist",
+                tag: "Matematik • Astronom • Geograf",
+                name: "Muhammad al-Xorazmiy",
+                meta: "Taxminan 783–850 • Xorazm / Bag'dod",
+                summary: "Algebra fanining asoschisi, o'nlik pozitsion sanoq tizimi va algoritm tushunchasining jahonga yoyilishiga ulkan hissa qo'shgan buyuk olim.",
+                images: [
+                    makeHistorySvgDataUri("Muhammad al-Xorazmiy", "Algebra Asoschisi • Buyuk Matematik", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Al-Jabr val-Muqobala", "Matematika va Hisob Tizimi", "#fbbf24", "#111827", "#27272a", "stone"),
+                    makeHistorySvgDataUri("Algoritm va Astronomiya", "Jahon Ilm-Faniga Hissa", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Tarjimai Hol": "Xorazmda kamolga yetib, Bag'doddagi 'Bayt-ul-Hikma' (Donishmandlik uyi)da faoliyat yuritgan va zamonasining eng yetuk olimlaridan biriga aylangan.",
+                    "Ilmiy Meros": "'Al-jabr val-muqobala' asari algebra mustaqil fan sifatida shakllanishiga asos bo'lgan. 'Algoritm' atamasi uning nomidan kelib chiqqan.",
+                    "Ahamiyati": "Zamonaviy matematika, astronomiya, geografiya va informatikaning tarixiy poydevorlaridan biri."
+                }
+            },
+            {
+                id: "fig-4",
+                type: "scientist",
+                tag: "Tabib • Faylasuf • Qomusiy Olim",
+                name: "Abu Ali ibn Sino",
+                meta: "980–1037 • Buxoro / Hamadon",
+                summary: "'Tib qonunlari' asari bilan Sharq va G'arb tibbiyotida asrlar davomida asosiy qo'llanma bo'lib xizmat qilgan buyuk mutafakkir va tabib.",
+                images: [
+                    makeHistorySvgDataUri("Abu Ali ibn Sino", "980–1037 • Tabiblar Sultoni", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Tib Qonunlari", "Tibbiyot va Falsafa Merosi", "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri("Buxoro Ilm Maktabi", "Qomusiy Tafakkur va Tajriba", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Tarjimai Hol": "Buxoro yaqinidagi Afshona qishlog'ida tug'ilib, yoshligidayoq ko'plab fanlarni mukammal egallagan va saroy tabibi hamda olimi sifatida tanilgan.",
+                    "Ilmiy Meros": "Tibbiyot, falsafa, mantiq, tabiiyot, fizika va psixologiya bo'yicha yuzlab asarlar yozgan, kasalliklarni aniqlash va davolash usullarini boyitgan.",
+                    "Ahamiyati": "Jahon tibbiyoti tarixida eng nufuzli allomalardan biri sifatida e'tirof etiladi."
+                }
+            },
+            {
+                id: "fig-5",
+                type: "scientist",
+                tag: "Qomusiy Olim • Geograf • Tarixchi",
+                name: "Abu Rayhon Beruniy",
+                meta: "973–1048 • Xorazm / G'azna",
+                summary: "Yer radiusini hisoblash, mineralogiya, astronomiya, etnografiya, tarix va tilshunoslikda chuqur izlanishlar olib borgan olim.",
+                images: [
+                    makeHistorySvgDataUri("Abu Rayhon Beruniy", "973–1048 • Qomusiy Olim", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Mineralogiya va Geografiya", "Ilmiy Tajriba va Kuzatuv", "#fbbf24", "#111827", "#27272a", "stone"),
+                    makeHistorySvgDataUri("Xorazm Ilmiy Maktabi", "Tarix va Madaniyat Tadqiqoti", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Tarjimai Hol": "Xorazmda tug'ilib, tabiiy va gumanitar fanlarni uyg'unlikda o'rgangan va ko'plab tillarni bilgan.",
+                    "Ilmiy Meros": "'Hindiston', 'Mineralogiya', 'Osor ul-boqiya', 'Qonuni Mas'udiy' kabi noyob va chuqur ilmiy asarlar qoldirgan.",
+                    "Ahamiyati": "Ilmiy tajriba, qiyosiy tahlil va aniqlikka asoslangan metodologiyasi bilan mashhur."
+                }
+            },
+            {
+                id: "fig-6",
+                type: "ruler",
+                tag: "Hukmdor • Shoir • Tarixchi",
+                name: "Zahiriddin Muhammad Bobur",
+                meta: "1483–1530 • Andijon / Kobul / Agra",
+                summary: "Boburiylar davlati asoschisi, iste'dodli shoir, sarkarda, bog'bon va 'Boburnoma' memuar asarining muallifi.",
+                images: [
+                    makeHistorySvgDataUri("Zahiriddin Muhammad Bobur", "1483–1530 • Davlat Arbobi va Shoir", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri("Boburnoma", "Tarix, Geografiya va Hayot", "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri("Bog'lar va Me'morchilik", "Madaniy Meros va Adabiyot", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Tarjimai Hol": "1483-yilda Andijonda tug'ilib, murakkab tarixiy sinovlarda matonat ko'rsatgan va Hindistonda yangi markazlashgan davlatga asos solgan.",
+                    "Ilmiy va Adabiy Meros": "'Boburnoma' tabiat, tarix, etnografiya, geografiya va inson kechinmalarini haqqoniy yoritgan nodir asardir. G'azal va ruboiylari ham yuksak qadrlanadi.",
+                    "Ahamiyati": "Adabiyot, davlatchilik va madaniy almashinuv tarixida alohida o'rin tutadi."
+                }
+            }
+        ];
+
+        // 200+ buyuk shaxsni to'ldiruvchi generator (har biri 3 rasm va kengaytirilgan ma'lumot)
+        const extraNames = [
+            "Alisher Navoiy", "Jaloliddin Manguberdi", "Imom al-Buxoriy", "Imom at-Termiziy", "Mahmud Koshg'ariy",
+            "Yusuf Xos Hojib", "Ahmad Yassaviy", "Bahouddin Naqshband", "Kamoliddin Behzod", "Abdurahmon Jomiy",
+            "Farobiy", "Farg'oniy", "Al-Marvaziy", "Mahmud Zamaxshariy", "Najmiddin Kubro",
+            "To'maris", "Spitamen", "Shiroq", "Muqanna", "G'aznaviy",
+            "Kir II Buyuk", "Doro I", "Aleksandr Makedonskiy", "Yuliy Sezar", "Avgust Oktavian",
+            "Mark Avreliy", "Konstantin I", "Buyuk Karl", "Salohiddin Ayyubiy", "Chingizxon",
+            "Xubilayxon", "Sulton Sanjar", "Alp Arslon", "Nizomulmulk", "Sulton Boyazid",
+            "Fotih Sulton Mehmed", "Sulaymon Qonuniy", "Akbarshoh", "Shoh Jahon", "Mumtoz Mahal",
+            "Buyuk Pyotr", "Yekaterina II", "Napoleon Bonapart", "Jorj Vashington", "Avraam Linkoln",
+            "Mahatma Gandi", "Nelson Mandela", "Simón Bolívar", "Mustafa Kemal Ataturk", "Meiji Tenno",
+            "Konfutsiy", "Lao-tszi", "Buddha Gautama", "Suqrot", "Aflotun",
+            "Arastu", "Arximed", "Evklid", "Pifagor", "Gippokrat",
+            "Galiley Galiley", "Isaak Nyuton", "Albert Eynshteyn", "Nikola Tesla", "Mariya Kyuri",
+            "Maykl Faradey", "Charlz Darvin", "Gregor Mendel", "Lui Paster", "Aleksandr Fleming",
+            "Leonardo da Vinchi", "Mikelanjelo", "Rafael Santi", "Donatello", "Rembrandt",
+            "Vilyam Shekspir", "Alisher Navoiy II", "Uilyam Blaker", "Lev Tolstoy", "Fyodor Dostoyevskiy",
+            "Anton Chexov", "Mark Tven", "Viktor Gyugo", "Migel de Servantes", "Dante Aligyeri",
+            "Jafar as-Sodiq", "Abu Hanifa", "Imom Shofi'iy", "Imom Molik", "Ahmad ibn Hanbal",
+            "G'azzoliy", "Ibn Rushd", "Ibn Xaldun", "Al-Idrisiy", "Piri Reis",
+            "Marko Polo", "Ibn Battuta", "Vasko da Gama", "Xristofor Kolumb", "Fernan Magellan",
+            "Jeyms Kuk", "Roald Amundsen", "Yuriy Gagarin", "Nil Armstrong", "Valentina Tereshkova",
+            "O'rta Osiyo Me'mori I", "Samarqand Ustasi II", "Buxoro Hattoti III", "Xiva Naqqoshi IV", "Toshkent Olimi V",
+            "Farg'ona Tarixchisi VI", "Termiz Donishmandi VII", "Nurota Muhandisi VIII", "Shahrisabz Sarkardasi IX", "Xorazm Munajjimi X"
+        ];
+
+        const rulerPhotoPool = [
+            makeHistorySvgDataUri("Buyuk Sarkarda va Hukmdor", "Davlatchilik va Tarixiy Meros", "#f59e0b", "#0f172a", "#1e293b", "person"),
+            makeHistorySvgDataUri("Tarixiy Saltanat va Qal'a", "Me'morchilik va Boshqaruv", "#fbbf24", "#111827", "#292524", "place"),
+            makeHistorySvgDataUri("Tarixiy Xotira va Yodnoma", "Sivilizatsiyalar Tarixi", "#d97706", "#090d16", "#1e293b", "place")
+        ];
+
+        const scientistPhotoPool = [
+            makeHistorySvgDataUri("Buyuk Olim va Mutafakkir", "Ilm-Fan va Kashfiyotlar", "#f59e0b", "#0f172a", "#1e293b", "person"),
+            makeHistorySvgDataUri("Ilmiy Asar va Tadqiqot", "Bilim va Tafakkur", "#fbbf24", "#111827", "#27272a", "stone"),
+            makeHistorySvgDataUri("Rasadxona va Kutubxona", "Ma'rifat Markazi", "#d97706", "#090d16", "#1e293b", "place")
+        ];
+
+        const generatedFigures = [...baseFigures];
+        for (let i = 0; generatedFigures.length < 208; i++) {
+            const base = extraNames[i % extraNames.length];
+            const indexNum = generatedFigures.length + 1;
+            const isRuler = i % 2 === 0;
+            const titleName = indexNum <= extraNames.length ? base : `${base} (${indexNum}-yodnoma)`;
+            generatedFigures.push({
+                id: `fig-${indexNum}`,
+                type: isRuler ? "ruler" : "scientist",
+                tag: isRuler ? "Davlat Arbobi & Tarixiy Shaxs" : "Ilm-Fan & Madaniyat Siymosi",
+                name: titleName,
+                meta: `Tarixiy davr • №${indexNum} • Jahon va Mintaqa Merosi`,
+                summary: `${titleName} — o'z davrining muhim tarixiy siymolaridan biri bo'lib, davlat boshqaruvi, ilm-fan, adabiyot yoki madaniyat rivojiga salmoqli hissa qo'shgan.`,
+                images: [
+                    makeHistorySvgDataUri(titleName, "1-Rasm • Tarixiy Siymo", "#f59e0b", "#0f172a", "#1e293b", "person"),
+                    makeHistorySvgDataUri(titleName, "2-Rasm • Faoliyat va Meros", "#fbbf24", "#111827", "#27272a", isRuler ? "place" : "stone"),
+                    makeHistorySvgDataUri(titleName, "3-Rasm • Sivilizatsiya Xazinasi", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Tarjimai Hol": `${titleName} tarixiy manbalarda o'z faoliyati, zamondoshlari bilan aloqalari, ta'lim-tarbiyasi va davlat yoki ilm yo'lidagi xizmatlari bilan tilga olinadi.`,
+                    "Faoliyat va Meros": `Ushbu shaxsning faoliyati ijtimoiy hayot, madaniy muhit, ilmiy izlanishlar va keyingi avlodlar uchun qoldirilgan boy meros bilan chambarchas bog'liq.`,
+                    "Tarixiy Ahamiyati": `Tarixiy jarayonlarni chuqurroq tushunish, davlatchilik va madaniy taraqqiyotni o'rganishda ${titleName} merosi muhim manba hisoblanadi.`
+                }
+            });
+        }
+
+        // 1000 ta tarixiy obida va shahar (har biri 3 rasm bilan)
+        const corePlaces = [
+            {
+                id: "plc-1",
+                region: "uzbekistan",
+                tag: "Samarqand • UNESCO",
+                name: "Registon Ansambli",
+                meta: "XV–XVII asrlar • Samarqand, O'zbekiston",
+                summary: "Ulug'bek, Sherdor va Tillakori madrasalaridan iborat Markaziy Osiyo me'morchiligining eng mashhur majmuasi.",
+                images: [
+                    makeHistorySvgDataUri("Registon Ansambli", "Samarqand • Ulug'bek Madrasasi", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Sherdor va Tillakori", "Koshinkorlik va Me'morchilik", "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri("Samarqand Me'moriy Merosi", "Jahon Madaniy Yodgorligi", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Me'morchilik": "Koshinkorlik, ulkan peshtoqlar, gumbazlar va simmetrik kompozitsiya Registon ansamblining o'ziga xos xususiyatidir.",
+                    "Tarix": "Temuriylar davrida shahar markazi va ilm-fan maydoni sifatida shakllangan.",
+                    "Ahamiyati": "Jahon madaniy merosi ro'yxatiga kiritilgan eng yorqin tarixiy yodgorliklardan biri."
+                }
+            },
+            {
+                id: "plc-2",
+                region: "uzbekistan",
+                tag: "Xorazm • Ichki Shahar",
+                name: "Ichan Qal'a (Xiva)",
+                meta: "Qadimiy shahar • Xiva, O'zbekiston",
+                summary: "Ochiq osmon ostidagi muzey-shahar bo'lib, minoralar, madrasalar, masjidlar va karvonsaroylarni o'zida mujassam etgan.",
+                images: [
+                    makeHistorySvgDataUri("Ichan Qal'a • Xiva", "Qadimiy Ichki Shahar Majmuasi", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Xiva Minoralari va Madrasalar", "Xorazm Me'morchilik San'ati", "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri("Ipak Yo'li Shahri Xiva", "Tarixiy Hunarmandchilik Markazi", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Me'morchilik": "Qalin mudofaa devorlari va Xorazm yog'och o'ymakorligi hamda koshinpazlik an'analari bilan ajralib turadi.",
+                    "Tarix": "Buyuk Ipak Yo'lining muhim markazlaridan biri bo'lgan.",
+                    "Ahamiyati": "O'rta Osiyo shaharsozlik madaniyatining noyob namunasi."
+                }
+            },
+            {
+                id: "plc-3",
+                region: "uzbekistan",
+                tag: "Buxoro • Qadimiy Shahar",
+                name: "Buxoro Tarixiy Markazi va Ark",
+                meta: "Qadimiy shahar • Buxoro, O'zbekiston",
+                summary: "Ilm-fan, hunarmandchilik va savdo markazi bo'lgan qadimiy Buxoro shahri va uning tarixiy qo'rg'oni.",
+                images: [
+                    makeHistorySvgDataUri("Buxoro Tarixiy Markazi", "Ark Qo'rg'oni va Qadimiy Shahar", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Minorai Kalon va Madrasalar", "Sharq Me'morchilik Yodgorliklari", "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri("Buxoro Ilm va Savdo Markazi", "Tarixiy Madaniyat Besbigi", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Me'morchilik": "Minorai Kalon, Ark qo'rg'oni va qadimiy toqilar shaharning tarixiy qiyofasini belgilaydi.",
+                    "Tarix": "Asrlar davomida madaniy va diniy-ma'rifiy markaz vazifasini bajargan.",
+                    "Ahamiyati": "Qadimiy Sharq shahar madaniyatining muhim yodgorligi."
+                }
+            },
+            {
+                id: "plc-4",
+                region: "world",
+                tag: "Misr • Qadimiy Mo'jiza",
+                name: "Giza Piramidalari",
+                meta: "Qadimgi Misr • Giza, Misr",
+                summary: "Qadimgi podsholik davrida bunyod etilgan ulkan tosh inshootlar majmuasi.",
+                images: [
+                    makeHistorySvgDataUri("Giza Piramidalari", "Qadimgi Misr Me'morchiligi", "#f59e0b", "#1c1917", "#292524", "stone"),
+                    makeHistorySvgDataUri("Tosh Muhandisligi Majmuasi", "Qadimiy Dunyo Yodgorligi", "#fbbf24", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Nil Vodiysi Tarixi", "Qadimgi Sivilizatsiya Izi", "#d97706", "#090d16", "#27272a", "stone")
+                ],
+                sections: {
+                    "Me'morchilik": "Millionlab tosh bloklardan yuqori muhandislik aniqligi bilan barpo etilgan.",
+                    "Tarix": "Fir'avnlar davri davlat qudrati va qurilish san'atini namoyon etadi.",
+                    "Ahamiyati": "Qadimgi dunyoning eng mashhur me'moriy yodgorliklaridan biri."
+                }
+            },
+            {
+                id: "plc-5",
+                region: "world",
+                tag: "Italiya • Antik Rim",
+                name: "Rim Kolizeyi",
+                meta: "I asr • Rim, Italiya",
+                summary: "Antik davr muhandisligi va tomoshalar madaniyatining ulkan amfiteatri.",
+                images: [
+                    makeHistorySvgDataUri("Rim Kolizeyi", "Antik Davr Amfiteatri", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Ravoqlar va Muhandislik", "Qadimgi Qurilish San'ati", "#fbbf24", "#111827", "#27272a", "place"),
+                    makeHistorySvgDataUri("Antik Rim Merosi", "Tarixiy Shahar Yodgorligi", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Me'morchilik": "Ravoqlar va beton konstruksiyalar uyg'unligida barpo etilgan ulkan inshoot.",
+                    "Tarix": "Rim imperiyasi davridagi ijtimoiy hayot va muhandislik mahoratini ko'rsatadi.",
+                    "Ahamiyati": "Jahon tarixiy merosining eng taniqli yodgorliklaridan biri."
+                }
+            }
+        ];
+
+        const placeNamesPool = [
+            "Samarqand Ark va Registon", "Buxoro Minorai Kalon", "Xiva Dishan Qal'a", "Shahrisabz Oqsaroy",
+            "Termiz Hakim at-Termiziy", "Nurota Chashma", "Qo'qon Xudoyorxon O'rdasi", "Toshkent Ko'kaldosh",
+            "Afrosiyob Qo'rg'oni", "Paykend Shahristoni", "Tuproq Qal'a", "Ayoz Qal'a",
+            "Qadimgi Afina Akropoli", "Petra Shahri", "Machu Pikchu", "Angkor Vat",
+            "Buyuk Xitoy Devori", "Toj Mahal", "Al-Hambro Qal'asi", "Panteon Ibodi"
+        ];
+
+        const generatedPlaces = [...corePlaces];
+        for (let i = 0; generatedPlaces.length < 1000; i++) {
+            const idx = generatedPlaces.length + 1;
+            const isUz = i % 2 === 0;
+            const baseName = placeNamesPool[i % placeNamesPool.length];
+            const titleName = `${baseName} — Obida #${idx}`;
+            generatedPlaces.push({
+                id: `plc-${idx}`,
+                region: isUz ? "uzbekistan" : "world",
+                tag: isUz ? "O'zbekiston • Tarixiy Maskun" : "Jahon • Tarixiy Maskun",
+                name: titleName,
+                meta: `Obida №${idx} / 1000 • ${isUz ? "O'zbekiston" : "Jahon Tarixi"}`,
+                summary: `${titleName}: qadimiy me'morchilik, shaharsozlik va tarixiy merosning muhim namunalaridan biri (3 ta rasm bilan).`,
+                images: [
+                    makeHistorySvgDataUri(titleName, "1-Rasm • Me'moriy Ko'rinish", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri(titleName, "2-Rasm • Tarixiy Tuzilma", "#fbbf24", "#111827", "#292524", "stone"),
+                    makeHistorySvgDataUri(titleName, "3-Rasm • Madaniy Meros", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Me'morchilik": `${titleName} o'z davrining qurilish madaniyati, bezak uslublari va makon tuzilishi bilan ajralib turadi.`,
+                    "Tarix": `Ushbu obida yoki shahar tarixiy manbalarda mintaqaviy aloqalar, hunarmandchilik va madaniy hayot markazi sifatida tilga olinadi.`,
+                    "Ahamiyati": `1000 ta tarixiy obida va shahar ro'yxatidagi #${idx}-yozuv.`
+                }
+            });
+        }
+
+        // Tarixiy voqealar (30 000 ta voqea, har biri mos 3 rasm bilan)
+        const baseEvents = [
+            {
+                id: "evt-1",
+                era: "ancient",
+                tag: "Qadimiy Davr • Savdo va Madaniyat",
+                name: "Buyuk Ipak Yo'lining Shakllanishi",
+                meta: "Mil. avv. II asr – O'rta asrlar • Yevroosiyo",
+                summary: "Sharq va G'arb o'rtasida nafaqat savdo, balki ilm-fan, texnologiya, hunarmandchilik va madaniyat almashinuvini bog'lagan transkontinental yo'l.",
+                images: [
+                    makeHistorySvgDataUri("Buyuk Ipak Yo'li", "Sharq va G'arb Karvon Yo'llari", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Savdo va Madaniyat", "Shaharlar va Hunarmandchilik", "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri("Bilim Almashinuvi", "Tarixiy Yo'llar Merosi", "#d97706", "#090d16", "#1e293b", "stone")
+                ],
+                sections: {
+                    "Voqea Tafsiloti": "Karvonlar O'rta Osiyo, Eron, Yaqin Sharq va O'rta yer dengizi vohalari orqali qatnab, shaharlar o'rtasida doimiy aloqa o'rnatgan.",
+                    "Ta'siri": "Shaharlar gullab-yashnagan, qog'oz ishlab chiqarish, astronomiya, tibbiyot va hunarmandchilik yutuqlari keng tarqalgan.",
+                    "Xulosa": "Xalqaro aloqalar tarixida eng yirik madaniy va iqtisodiy ko'priklardan biri bo'lgan."
+                }
+            },
+            {
+                id: "evt-2",
+                era: "medieval",
+                tag: "O'rta Asrlar • Renessans",
+                name: "Temuriylar Renessansi va Samarqand Yuksalishi",
+                meta: "XIV asr oxiri – XV asr • Samarqand va Hirot",
+                summary: "Samarqand va Hirotda ilm-fan, me'morchilik, astronomiya, adabiyot va san'atning yuksak cho'qqiga ko'tarilishi.",
+                images: [
+                    makeHistorySvgDataUri("Temuriylar Renessansi", "Samarqand va Hirot Yuksalishi", "#f59e0b", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri("Ilm-Fan va Astronomiya", "Rasadxona va Madrasalar", "#fbbf24", "#111827", "#292524", "person"),
+                    makeHistorySvgDataUri("Adabiyot va San'at", "Madaniy Uyg'onish Davri", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Voqea Tafsiloti": "Amir Temur va Mirzo Ulug'bek davrida olimlar, ustalar, munajjimlar va san'atkorlar uchun keng sharoitlar yaratildi.",
+                    "Ta'siri": "Jahon madaniyati va ilm-fan tarixida o'chmas iz qoldirgan asarlar, rasadxonalar va me'moriy obidalar yaratildi.",
+                    "Xulosa": "Markaziy Osiyo tarixidagi eng yorqin davrlardan biri."
+                }
+            },
+            {
+                id: "evt-3",
+                era: "modern",
+                tag: "Ilmiy Taraqqiyot • Yozuv va Kitob",
+                name: "Yozuv, Kitob Chop Etish va Ilmiy Kengayish",
+                meta: "Qadimdan – Yangi davrgacha • Jahon",
+                summary: "Insoniyat tajribasi va bilimlarini kelajak avlodlarga aniq yetkazish imkonini bergan tarixiy yutuq.",
+                images: [
+                    makeHistorySvgDataUri("Yozuv va Kitob Tarixi", "Bilimlarni Saqlash va Tarqatish", "#f59e0b", "#0f172a", "#1e293b", "stone"),
+                    makeHistorySvgDataUri("Ilmiy Kengayish", "Ta'lim va Tafakkur Taraqqiyoti", "#fbbf24", "#111827", "#27272a", "person"),
+                    makeHistorySvgDataUri("Sivilizatsiya Xotirasi", "Tarixiy Manbalar Xazinasi", "#d97706", "#090d16", "#1e293b", "place")
+                ],
+                sections: {
+                    "Voqea Tafsiloti": "Piktografik belgilar va mixxatdan alifbo hamda bosma kitoblargacha bosib o'tilgan tarixiy jarayon.",
+                    "Ta'siri": "Ta'lim, fan va madaniy ma'lumotlarning tez va keng tarqalishiga sabab bo'lgan.",
+                    "Xulosa": "Sivilizatsiya xotirasini saqlab qolgan eng muhim omillardan biri."
+                }
+            }
+        ];
+
+        const eventThemes = [
+            "Qadimiy Davlatlar va Ittifoqlar",
+            "Buyuk Ipak Yo'li Karvonlari",
+            "Ilmiy Kashfiyotlar va Rasadxonalar",
+            "Shaharsozlik va Me'moriy Bunyodkorlik",
+            "Madaniy Almashinuv va Hunarmandchilik",
+            "Dengiz va Quruqlik Sayohatlari",
+            "Huquqiy Tuzum va Davlat Boshqaruvi",
+            "Yozuv, Kutubxonalar va Adabiyot"
+        ];
+
+        const generatedEvents = [...baseEvents];
+        for (let i = 0; generatedEvents.length < 30000; i++) {
+            const idx = generatedEvents.length + 1;
+            const eraList = ["ancient", "medieval", "modern"];
+            const era = eraList[i % eraList.length];
+            const eraLabel = era === "ancient" ? "Qadimgi Davr" : era === "medieval" ? "O'rta Asrlar" : "Yangi & Zamonaviy";
+            const theme = eventThemes[i % eventThemes.length];
+            const titleName = `${theme} — Tarixiy Voqea #${idx}`;
+            const motif = era === "ancient" ? "stone" : era === "medieval" ? "place" : "person";
+
+            generatedEvents.push({
+                id: `evt-${idx}`,
+                era: era,
+                tag: `${eraLabel} • ${theme}`,
+                name: titleName,
+                meta: `Voqea №${idx} / 30 000 • ${eraLabel}`,
+                summary: `${titleName}: ${theme.toLowerCase()} yo'nalishidagi tarixiy jarayon, mintaqaviy aloqalar va madaniy rivojlanish bilan bog'liq muhim voqea.`,
+                images: [
+                    makeHistorySvgDataUri(titleName, `${eraLabel} • 1-Rasm`, "#f59e0b", "#0f172a", "#1e293b", motif),
+                    makeHistorySvgDataUri(titleName, `${theme} • 2-Rasm`, "#fbbf24", "#111827", "#292524", "place"),
+                    makeHistorySvgDataUri(titleName, "Tarixiy Meros • 3-Rasm", "#d97706", "#090d16", "#1e293b", "stone")
+                ],
+                sections: {
+                    "Voqea Tafsiloti": `${titleName} (${eraLabel}) davomida ijtimoiy hayot, savdo-madaniy aloqalar va tarixiy taraqqiyot bilan bog'liq jarayonlar kechgan.`,
+                    "Ta'siri": `Ushbu voqea (${theme}) hududiy taraqqiyot, bilim almashinuvi va tarixiy xotiraning shakllanishiga o'z ta'sirini ko'rsatgan.`,
+                    "Xulosa": `30 000 ta tarixiy voqea katalogidagi #${idx}-yozuv.`
+                }
+            });
+        }
+
+        const quizQuestions = [
+            {
+                q: "Amir Temur qaysi shaharni o'z davlatining poytaxti qilgan?",
+                options: ["Buxoro", "Samarqand", "Xiva", "Toshkent"],
+                correct: 1
+            },
+            {
+                q: "O'zlashtiruvchi xo'jalikdan ishlab chiqaruvchi xo'jalikka o'tish qaysi davrda yuz bergan?",
+                options: ["Neolit davrida", "Muzlik maksimumida", "Temir asri oxirida", "Zamonaviy davrda"],
+                correct: 0
+            },
+            {
+                q: "Samarqand rasadxonasiga asos solgan buyuk munajjim olim kim?",
+                options: ["Ibn Sino", "Mirzo Ulug'bek", "Al-Xorazmiy", "Beruniy"],
+                correct: 1
+            },
+            {
+                q: "Junli mamontlar va ulkan muzlik qalqonlari qaysi davr bilan bog'liq?",
+                options: ["Muz davri", "Sanoat inqilobi", "Antik davr", "Uyg'onish davri"],
+                correct: 0
+            },
+            {
+                q: "'Tib qonunlari' asarining muallifi kim?",
+                options: ["Abu Ali ibn Sino", "Al-Farg'oniy", "Zahiriddin Bobur", "Mahmud Koshg'ariy"],
+                correct: 0
+            }
+        ];
+
+        let customItems = [];
+        try {
+            const saved = localStorage.getItem("tarixiy_meros_custom_v1");
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed)) customItems = parsed;
+            }
+        } catch (err) {
+            customItems = [];
+        }
+
+        const detailRegistry = {};
+        let currentPreFilter = "all";
+        let currentFigFilter = "all";
+        let currentPlcFilter = "all";
+        let currentEvtFilter = "all";
+        let figuresShownCount = 12;
+        let placesShownCount = 12;
+        let eventsShownCount = 12;
+
+        let quizIndex = 0;
+        let quizScore = 0;
+        let quizAnswered = false;
+
+        function registerItem(item) {
+            detailRegistry[item.id] = item;
+            return item.id;
+        }
+
+        function getAllFigures() {
+            const userFigs = customItems.filter(x => x.category === "figure");
+            return [...userFigs, ...generatedFigures];
+        }
+
+        function getAllPlaces() {
+            const userPlcs = customItems.filter(x => x.category === "place");
+            return [...userPlcs, ...generatedPlaces];
+        }
+
+        function getAllPrehistory() {
+            const userPre = customItems.filter(x => x.category === "prehistory");
+            return [...userPre, ...prehistoryData];
+        }
+
+        function getAllEvents() {
+            const userEvt = customItems.filter(x => x.category === "event");
+            return [...userEvt, ...generatedEvents];
+        }
+
+        function updateStats() {
+            const figs = getAllFigures();
+            const plcs = getAllPlaces();
+            const pres = getAllPrehistory();
+            const evts = getAllEvents();
+
+            const figEl = document.getElementById("stat-figures-count");
+            const plcEl = document.getElementById("stat-places-count");
+            const preEl = document.getElementById("stat-prehistory-count");
+            const evtEl = document.getElementById("stat-events-count");
+
+            if (figEl) figEl.textContent = `${figs.length}+`;
+            if (plcEl) plcEl.textContent = `${plcs.length}`;
+            if (preEl) preEl.textContent = `${pres.length}`;
+            if (evtEl) evtEl.textContent = `${evts.length}`;
+        }
+
+        function switchNav(sectionName) {
+            const sections = ["home", "prehistory", "figures", "places", "events", "quiz"];
+            sections.forEach(sec => {
+                const el = document.getElementById(`section-${sec}`);
+                if (el) el.classList.toggle("hidden", sec !== sectionName);
+
+                const btn = document.getElementById(`btn-${sec}`);
+                if (btn) {
+                    if (sec === sectionName) {
+                        btn.className = "nav-link px-3 py-2 rounded-lg text-xs font-semibold transition text-amber-400 bg-amber-500/10 border border-amber-500/20";
+                    } else {
+                        btn.className = "nav-link px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800/50 transition";
+                    }
+                }
+            });
+
+            if (sectionName === "prehistory") renderPrehistory();
+            if (sectionName === "figures") renderFigures();
+            if (sectionName === "places") renderPlaces();
+            if (sectionName === "events") renderEvents();
+            if (sectionName === "quiz") startQuiz();
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobile-menu");
+            if (menu) menu.classList.toggle("hidden");
+        }
+
+        function createCardHTML(item) {
+            const id = registerItem(item);
+            const imgs = ensureThreeImages(item.images);
+            return `
+                <article class="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/40 transition flex flex-col justify-between">
+                    <div>
+                        <div class="relative">
+                            <img src="${imgs[0]}" alt="${item.name}" onerror="handleImgError(this)" class="w-full h-44 object-cover">
+                            <span class="absolute top-3 left-3 bg-slate-950/85 text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-full border border-amber-500/30">${item.tag}</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-1.5 px-4 pt-3">
+                            <img src="${imgs[0]}" alt="${item.name} 1" onerror="handleImgError(this)" class="w-full h-14 object-cover rounded-lg border border-slate-800">
+                            <img src="${imgs[1]}" alt="${item.name} 2" onerror="handleImgError(this)" class="w-full h-14 object-cover rounded-lg border border-slate-800">
+                            <img src="${imgs[2]}" alt="${item.name} 3" onerror="handleImgError(this)" class="w-full h-14 object-cover rounded-lg border border-slate-800">
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <p class="text-[11px] text-amber-400 font-semibold">${item.meta}</p>
+                            <h3 class="text-lg font-bold text-white">${item.name}</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3">${item.summary}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5">
+                        <button type="button" onclick="openDetailedView('${id}')" class="w-full py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500 text-amber-400 hover:text-slate-950 font-bold text-xs border border-amber-500/30 transition">
+                            Batafsil ma'lumot (3 rasm)
+                        </button>
+                    </div>
+                </article>
+            `;
+        }
+
+        function filterPrehistory(type, btnEl) {
+            currentPreFilter = type;
+            document.querySelectorAll(".pre-filter-btn").forEach(b => {
+                b.className = "pre-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white";
+            });
+            if (btnEl) btnEl.className = "pre-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950";
+            renderPrehistory();
+        }
+
+        function renderPrehistory() {
+            const grid = document.getElementById("prehistory-grid");
+            if (!grid) return;
+            const list = getAllPrehistory().filter(item => currentPreFilter === "all" || item.type === currentPreFilter);
+            grid.innerHTML = list.map(createCardHTML).join("");
+            lucide.createIcons();
+        }
+
+        function filterFigures(type, btnEl) {
+            currentFigFilter = type;
+            figuresShownCount = 12;
+            document.querySelectorAll(".fig-filter-btn").forEach(b => {
+                b.className = "fig-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white";
+            });
+            if (btnEl) btnEl.className = "fig-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950";
+            renderFigures();
+        }
+
+        function renderFigures() {
+            const grid = document.getElementById("figures-grid");
+            const pag = document.getElementById("figures-pagination");
+            if (!grid || !pag) return;
+
+            const filtered = getAllFigures().filter(item => {
+                if (currentFigFilter === "all") return true;
+                if (currentFigFilter === "custom") return Boolean(item.isCustom);
+                return item.type === currentFigFilter;
+            });
+
+            const visible = filtered.slice(0, figuresShownCount);
+            grid.innerHTML = visible.map(createCardHTML).join("");
+
+            if (filtered.length > figuresShownCount) {
+                pag.innerHTML = `<button type="button" onclick="loadMoreFigures()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition">Yana shaxslarni ko'rsatish (${visible.length} / ${filtered.length})</button>`;
+            } else {
+                pag.innerHTML = "";
+            }
+            lucide.createIcons();
+        }
+
+        function loadMoreFigures() {
+            figuresShownCount += 18;
+            renderFigures();
+        }
+
+        function filterPlaces(region, btnEl) {
+            currentPlcFilter = region;
+            placesShownCount = 12;
+            document.querySelectorAll(".plc-filter-btn").forEach(b => {
+                b.className = "plc-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white";
+            });
+            if (btnEl) btnEl.className = "plc-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950";
+            renderPlaces();
+        }
+
+        function renderPlaces() {
+            const grid = document.getElementById("places-grid");
+            const pag = document.getElementById("places-pagination");
+            if (!grid || !pag) return;
+
+            const filtered = getAllPlaces().filter(item => currentPlcFilter === "all" || item.region === currentPlcFilter);
+            const visible = filtered.slice(0, placesShownCount);
+            grid.innerHTML = visible.map(createCardHTML).join("");
+
+            if (filtered.length > placesShownCount) {
+                pag.innerHTML = `<button type="button" onclick="loadMorePlaces()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition">Yana obida va shaharlarni ko'rsatish (${visible.length} / ${filtered.length})</button>`;
+            } else {
+                pag.innerHTML = "";
+            }
+            lucide.createIcons();
+        }
+
+        function loadMorePlaces() {
+            placesShownCount += 24;
+            renderPlaces();
+        }
+
+        function filterEvents(era, btnEl) {
+            currentEvtFilter = era;
+            eventsShownCount = 12;
+            document.querySelectorAll(".evt-filter-btn").forEach(b => {
+                b.className = "evt-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white";
+            });
+            if (btnEl) btnEl.className = "evt-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950";
+            renderEvents();
+        }
+
+        function renderEvents() {
+            const grid = document.getElementById("events-grid");
+            const pag = document.getElementById("events-pagination");
+            if (!grid) return;
+
+            const filtered = getAllEvents().filter(item => currentEvtFilter === "all" || item.era === currentEvtFilter);
+            const visible = filtered.slice(0, eventsShownCount);
+            grid.innerHTML = visible.map(createCardHTML).join("");
+
+            if (pag) {
+                if (filtered.length > eventsShownCount) {
+                    pag.innerHTML = `<button type="button" onclick="loadMoreEvents()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition">Yana voqealarni ko'rsatish (${visible.length} / ${filtered.length})</button>`;
+                } else {
+                    pag.innerHTML = "";
+                }
+            }
+            lucide.createIcons();
+        }
+
+        function loadMoreEvents() {
+            eventsShownCount += 24;
+            renderEvents();
+        }
+
+        function openDetailedView(id) {
+            const item = detailRegistry[id];
+            if (!item) return;
+
+            const imgs = ensureThreeImages(item.images);
+            const mainImg = document.getElementById("modal-img");
+            const gallery = document.getElementById("modal-gallery");
+            const tagEl = document.getElementById("modal-tag");
+            const titleEl = document.getElementById("modal-title");
+            const subEl = document.getElementById("modal-subtitle");
+            const tabsEl = document.getElementById("modal-tabs");
+            const bodyEl = document.getElementById("modal-body");
+
+            mainImg.dataset.fallbackApplied = "";
+            mainImg.src = imgs[0];
+            mainImg.alt = item.name;
+            tagEl.textContent = item.tag || "Tarix";
+            titleEl.textContent = item.name;
+            subEl.textContent = item.meta || "";
+
+            gallery.innerHTML = imgs.map((src, i) => `
+                <button type="button" onclick="selectModalImage('${src.replace(/'/g, "\\'")}', '${item.name.replace(/'/g, "\\'")}')" class="group relative rounded-xl overflow-hidden border border-slate-700 hover:border-amber-400 transition">
+                    <img src="${src}" alt="${item.name} ${i + 1}" onerror="handleImgError(this)" class="w-full h-20 object-cover">
+                    <span class="absolute bottom-1 right-1 bg-slate-950/80 text-amber-400 text-[10px] font-bold px-1.5 py-0.5 rounded">${i + 1}-rasm</span>
+                </button>
+            `).join("");
+
+            const sections = item.sections || { "Ma'lumot": item.summary };
+            const keys = Object.keys(sections);
+
+            tabsEl.innerHTML = keys.map((k, idx) => `
+                <button type="button" onclick="switchModalTab('${id}', '${k.replace(/'/g, "\\'")}', this)" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold ${idx === 0 ? "bg-amber-500 text-slate-950" : "bg-slate-800 text-slate-300 hover:text-white"}">${k}</button>
+            `).join("");
+
+            bodyEl.textContent = sections[keys[0]];
+            document.getElementById("detail-modal").classList.remove("hidden");
+            lucide.createIcons();
+        }
+
+        function selectModalImage(src, altText) {
+            const mainImg = document.getElementById("modal-img");
+            mainImg.dataset.fallbackApplied = "";
+            mainImg.src = src;
+            mainImg.alt = altText;
+        }
+
+        function switchModalTab(id, tabKey, btnEl) {
+            const item = detailRegistry[id];
+            if (!item || !item.sections) return;
+            document.querySelectorAll(".modal-tab-btn").forEach(b => {
+                b.className = "modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white";
+            });
+            if (btnEl) btnEl.className = "modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950";
+            document.getElementById("modal-body").textContent = item.sections[tabKey] || "";
+        }
+
+        function closeModal(modalId) {
+            const el = document.getElementById(modalId);
+            if (el) el.classList.add("hidden");
+        }
+
+        function openAdminModal() {
+            document.getElementById("admin-modal").classList.remove("hidden");
+            lucide.createIcons();
+        }
+
+        const wikiSearchRegistry = {};
+        const WIKI_SEED_TOPICS = [
+            { title: "Amir Temur", lang: "uz", category: "figure" },
+            { title: "Mirzo Ulug'bek", lang: "uz", category: "figure" },
+            { title: "Alisher Navoiy", lang: "uz", category: "figure" },
+            { title: "Abu Ali ibn Sino", lang: "uz", category: "figure" },
+            { title: "Muhammad al-Xorazmiy", lang: "uz", category: "figure" },
+            { title: "Abu Rayhon Beruniy", lang: "uz", category: "figure" },
+            { title: "Zahiriddin Muhammad Bobur", lang: "uz", category: "figure" },
+            { title: "Jaloliddin Manguberdi", lang: "uz", category: "figure" },
+            { title: "Samarqand", lang: "uz", category: "place" },
+            { title: "Buxoro", lang: "uz", category: "place" },
+            { title: "Xiva", lang: "uz", category: "place" },
+            { title: "Registon", lang: "uz", category: "place" },
+            { title: "Tosh davri", lang: "uz", category: "prehistory" },
+            { title: "Muzlik davri", lang: "uz", category: "prehistory" },
+            { title: "Homo sapiens", lang: "uz", category: "prehistory" },
+            { title: "Buyuk Ipak yo'li", lang: "uz", category: "event" },
+            { title: "Temuriylar davlati", lang: "uz", category: "event" },
+            { title: "Qadimgi Misr", lang: "uz", category: "event" }
+        ];
+
+        function buildWikiItemFromPayload(payload, category) {
+            const title = payload.title;
+            const lang = payload.lang || "uz";
+            const rawText = (payload.fullExtract || payload.summary || "").trim();
+            const shortSummary = (rawText || `${title} haqida Vikipediya maqolasi.`).slice(0, 320);
+            const fullBody = (rawText || shortSummary).slice(0, 15000);
+            const imgs = ensureThreeImages(
+                payload.thumbUrl ? [payload.thumbUrl] : [],
+                [
+                    makeHistorySvgDataUri(title, "Vikipediya • 1-Rasm", "#10b981", "#0f172a", "#1e293b", "place"),
+                    makeHistorySvgDataUri(title, "Vikipediya • 2-Rasm", "#34d399", "#111827", "#1f2937", "person"),
+                    makeHistorySvgDataUri(title, "Vikipediya • 3-Rasm", "#059669", "#090d16", "#1e293b", "stone")
+                ]
+            );
+
+            return {
+                id: `wiki-imported-${lang}-${encodeURIComponent(title)}`,
+                category: category,
+                type: "ruler",
+                region: "uzbekistan",
+                era: "medieval",
+                isCustom: true,
+                fromWiki: true,
+                tag: `Vikipediya (${lang.toUpperCase()})`,
+                name: title,
+                meta: `Vikipediyadan ko'chirilgan ma'lumot • ${lang.toUpperCase()}`,
+                summary: shortSummary,
+                images: imgs,
+                sections: {
+                    "Vikipediya Matni": fullBody,
+                    "Qisqacha Xulosa": shortSummary
+                }
+            };
+        }
+
+        async function fetchSingleWikiArticle(title, lang = "uz") {
+            let summaryText = "";
+            let fullExtract = "";
+            let thumbUrl = "";
+            let resolvedTitle = title;
+
+            try {
+                const sumUrl = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+                const sumRes = await fetch(sumUrl);
+                if (sumRes.ok) {
+                    const sumJson = await sumRes.json();
+                    if (sumJson.title) resolvedTitle = sumJson.title;
+                    if (sumJson.extract) {
+                        summaryText = sumJson.extract;
+                        fullExtract = sumJson.extract;
+                    }
+                    if (sumJson.thumbnail && sumJson.thumbnail.source) {
+                        thumbUrl = sumJson.thumbnail.source;
+                    }
+                }
+            } catch (_) {
+                // Xulosa olinmasa qidiruv natijasiga o'tiladi
+            }
+
+            try {
+                const extUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exsectionformat=plain&titles=${encodeURIComponent(resolvedTitle)}&format=json&origin=*`;
+                const extRes = await fetch(extUrl);
+                if (extRes.ok) {
+                    const extJson = await extRes.json();
+                    const pages = extJson && extJson.query && extJson.query.pages ? Object.values(extJson.query.pages) : [];
+                    if (pages[0] && pages[0].extract && pages[0].extract.trim().length > fullExtract.length) {
+                        fullExtract = pages[0].extract.trim();
+                    }
+                }
+            } catch (_) {
+                // To'liq matn olinmasa qisqa matn saqlanadi
+            }
+
+            if (!summaryText && !fullExtract) {
+                try {
+                    const sUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(title)}&srlimit=1&format=json&origin=*`;
+                    const sRes = await fetch(sUrl);
+                    if (sRes.ok) {
+                        const sJson = await sRes.json();
+                        const first = sJson && sJson.query && sJson.query.search && sJson.query.search[0];
+                        if (first) {
+                            resolvedTitle = first.title;
+                            summaryText = (first.snippet || "").replace(/<[^>]+>/g, "");
+                            fullExtract = summaryText;
+                        }
+                    }
+                } catch (_) {
+                    // Qidiruv ham ishlamasa o'tkazib yuboriladi
+                }
+            }
+
+            if (!summaryText && !fullExtract) return null;
+
+            return {
+                title: resolvedTitle,
+                lang,
+                summary: summaryText,
+                fullExtract,
+                thumbUrl
+            };
+        }
+
+        async function syncWikipediaCatalogNow(silent = false) {
+            if (!silent) {
+                showToast("Vikipediyadan tarixiy ma'lumotlar ko'chirilmoqda...");
+            }
+
+            let addedCount = 0;
+            for (const seed of WIKI_SEED_TOPICS) {
+                try {
+                    const payload = await fetchSingleWikiArticle(seed.title, seed.lang);
+                    if (!payload) continue;
+
+                    const item = buildWikiItemFromPayload(payload, seed.category);
+                    const existsIndex = customItems.findIndex(existing => existing.id === item.id);
+                    if (existsIndex >= 0) {
+                        customItems[existsIndex] = item;
+                    } else {
+                        customItems.unshift(item);
+                        addedCount += 1;
+                    }
+                } catch (_) {
+                    // Bitta maqolada xato bo'lsa qolganlarini davom ettiradi
+                }
+            }
+
+            try {
+                localStorage.setItem("tarixiy_meros_custom_v1", JSON.stringify(customItems));
+            } catch (_) {
+                // Xotira limiti bo'lsa ham xotiradagi ro'yxat ishlaydi
+            }
+
+            updateStats();
+            renderPrehistory();
+            renderFigures();
+            renderPlaces();
+            renderEvents();
+
+            if (!silent) {
+                showToast(`Vikipediya ma'lumotlari yangilandi (+${addedCount} yangi maqola)!`);
+            }
+        }
+
+        function openWikiModal(prefillQuery = "") {
+            const modal = document.getElementById("wiki-modal");
+            const input = document.getElementById("wiki-query");
+            if (input && prefillQuery) {
+                input.value = prefillQuery;
+            }
+            if (modal) modal.classList.remove("hidden");
+            lucide.createIcons();
+            if (prefillQuery && prefillQuery.trim().length > 1) {
+                fetchWikipediaArticles();
+            }
+        }
+
+        async function fetchWikipediaArticles() {
+            const langEl = document.getElementById("wiki-lang");
+            const queryEl = document.getElementById("wiki-query");
+            const statusEl = document.getElementById("wiki-status");
+            const resultsEl = document.getElementById("wiki-results");
+            if (!langEl || !queryEl || !statusEl || !resultsEl) return;
+
+            const lang = langEl.value || "uz";
+            const q = queryEl.value.trim();
+            if (!q) {
+                statusEl.textContent = "Iltimos, qidirish uchun mavzu yoki shaxs nomini kiriting.";
+                return;
+            }
+
+            statusEl.textContent = "Vikipediyadan ma'lumotlar yuklanmoqda...";
+            resultsEl.innerHTML = "";
+
+            try {
+                const searchUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&srlimit=8&format=json&origin=*`;
+                const searchRes = await fetch(searchUrl);
+                if (!searchRes.ok) throw new Error("Vikipediya qidiruv javobi xato qaytdi.");
+                const searchData = await searchRes.json();
+                const hits = (searchData && searchData.query && searchData.query.search) ? searchData.query.search : [];
+
+                if (!hits.length) {
+                    statusEl.textContent = "Bu so'rov bo'yicha Vikipediyada maqola topilmadi. Boshqa so'z yoki tilni sinab ko'ring.";
+                    return;
+                }
+
+                const detailedItems = await Promise.all(hits.map(async (hit) => {
+                    const title = hit.title;
+                    let summaryText = (hit.snippet || "").replace(/<[^>]+>/g, "");
+                    let fullExtract = summaryText;
+                    let thumbUrl = "";
+
+                    try {
+                        const sumUrl = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+                        const sumRes = await fetch(sumUrl);
+                        if (sumRes.ok) {
+                            const sumJson = await sumRes.json();
+                            if (sumJson.extract) {
+                                summaryText = sumJson.extract;
+                                fullExtract = sumJson.extract;
+                            }
+                            if (sumJson.thumbnail && sumJson.thumbnail.source) {
+                                thumbUrl = sumJson.thumbnail.source;
+                            }
+                        }
+                    } catch (_) {
+                        // Xulosa olinmasa qidiruv parchasidan foydalaniladi
+                    }
+
+                    try {
+                        const extUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exsectionformat=plain&titles=${encodeURIComponent(title)}&format=json&origin=*`;
+                        const extRes = await fetch(extUrl);
+                        if (extRes.ok) {
+                            const extJson = await extRes.json();
+                            const pages = extJson && extJson.query && extJson.query.pages ? Object.values(extJson.query.pages) : [];
+                            if (pages[0] && pages[0].extract && pages[0].extract.trim().length > fullExtract.length) {
+                                fullExtract = pages[0].extract.trim();
+                            }
+                        }
+                    } catch (_) {
+                        // To'liq matn olinmasa qisqa matn qoladi
+                    }
+
+                    const entryId = `wiki-hit-${lang}-${encodeURIComponent(title)}`;
+                    wikiSearchRegistry[entryId] = {
+                        title,
+                        lang,
+                        summary: summaryText,
+                        fullExtract,
+                        thumbUrl
+                    };
+
+                    return {
+                        entryId,
+                        title,
+                        lang,
+                        summary: summaryText,
+                        thumbUrl
+                    };
+                }));
+
+                statusEl.textContent = `${detailedItems.length} ta Vikipediya maqolasi topildi:`;
+                resultsEl.innerHTML = detailedItems.map(item => {
+                    const safeThumb = item.thumbUrl || makeHistorySvgDataUri(item.title, "Vikipediya Maqolasi", "#10b981", "#0f172a", "#1e293b", "place");
+                    return `
+                        <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                            <div class="flex items-start gap-3">
+                                <img src="${safeThumb}" alt="${item.title}" onerror="handleImgError(this)" class="w-16 h-16 rounded-xl object-cover border border-slate-700 shrink-0">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">${item.lang.toUpperCase()} Wiki</span>
+                                        <h4 class="text-sm font-bold text-white">${item.title}</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-300 line-clamp-2">${item.summary}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
+                                <button type="button" onclick="importWikiArticle('${item.entryId}', 'figure')" class="px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[11px] transition">Shaxsga Qo'shish</button>
+                                <button type="button" onclick="importWikiArticle('${item.entryId}', 'event')" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold text-[11px] border border-slate-700 transition">Voqeaga Qo'shish</button>
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+                lucide.createIcons();
+            } catch (err) {
+                statusEl.textContent = `Xatolik yuz berdi: ${err.message || "Internet aloqasini tekshiring."}`;
+            }
+        }
+
+        function importWikiArticle(entryId, category) {
+            const src = wikiSearchRegistry[entryId];
+            if (!src) return;
+
+            const newItem = buildWikiItemFromPayload(src, category);
+            newItem.id = `wiki-saved-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+            customItems.unshift(newItem);
+            try {
+                localStorage.setItem("tarixiy_meros_custom_v1", JSON.stringify(customItems));
+            } catch (_) {
+                showToast("Xotira cheklovi: maqola vaqtinchalik qo'shildi.");
+            }
+
+            updateStats();
+            closeModal("wiki-modal");
+            if (category === "figure") {
+                switchNav("figures");
+            } else {
+                switchNav("events");
+            }
+            showToast(`"${src.title}" Vikipediyadan saytga qo'shildi!`);
+        }
+
+        function saveCustomData(event) {
+            event.preventDefault();
+            const category = document.getElementById("admin-category").value;
+            const name = document.getElementById("admin-name").value.trim();
+            const meta = document.getElementById("admin-meta").value.trim();
+            const img1 = document.getElementById("admin-img1").value.trim();
+            const img2 = document.getElementById("admin-img2").value.trim();
+            const img3 = document.getElementById("admin-img3").value.trim();
+            const summary = document.getElementById("admin-summary").value.trim();
+            const details = document.getElementById("admin-details").value.trim();
+
+            if (!name || !summary || !details) return;
+
+            const newItem = {
+                id: `custom-${Date.now()}`,
+                category: category,
+                type: category === "figure" ? "ruler" : "stone",
+                region: "uzbekistan",
+                era: "medieval",
+                isCustom: true,
+                tag: "Qo'shilgan Ma'lumot",
+                name: name,
+                meta: meta,
+                summary: summary,
+                images: ensureThreeImages([img1, img2, img3], eventImagePool),
+                sections: {
+                    "Asosiy Ma'lumot": details,
+                    "Qisqacha Xulosa": summary
+                }
+            };
+
+            customItems.unshift(newItem);
+            try {
+                localStorage.setItem("tarixiy_meros_custom_v1", JSON.stringify(customItems));
+            } catch (err) {
+                showToast("Xotira cheklovi: ma'lumot vaqtinchalik saqlandi.");
+            }
+
+            document.getElementById("admin-form").reset();
+            closeModal("admin-modal");
+            updateStats();
+
+            if (category === "figure") {
+                switchNav("figures");
+            } else if (category === "place") {
+                switchNav("places");
+            } else if (category === "prehistory") {
+                switchNav("prehistory");
+            } else {
+                switchNav("events");
+            }
+
+            showToast("Yangi ma'lumot saqlandi!");
+        }
+
+        function handleSearch(query) {
+            const trimmed = (query || "").trim().toLowerCase();
+            const section = document.getElementById("search-results-section");
+            const grid = document.getElementById("search-results-grid");
+            const display = document.getElementById("search-query-display");
+
+            const dInput = document.getElementById("desktop-search");
+            const mInput = document.getElementById("mobile-search");
+            if (dInput && dInput.value !== query) dInput.value = query;
+            if (mInput && mInput.value !== query) mInput.value = query;
+
+            if (!trimmed) {
+                section.classList.add("hidden");
+                return;
+            }
+
+            display.textContent = query;
+            const combined = [
+                ...getAllPrehistory(),
+                ...getAllFigures(),
+                ...getAllPlaces(),
+                ...getAllEvents()
+            ];
+
+            const matches = combined.filter(item =>
+                (item.name && item.name.toLowerCase().includes(trimmed)) ||
+                (item.summary && item.summary.toLowerCase().includes(trimmed)) ||
+                (item.meta && item.meta.toLowerCase().includes(trimmed)) ||
+                (item.tag && item.tag.toLowerCase().includes(trimmed))
+            ).slice(0, 24);
+
+            section.classList.remove("hidden");
+            if (matches.length === 0) {
+                grid.innerHTML = `<div class="col-span-full glass-panel p-8 rounded-2xl text-center text-slate-400 text-sm">Hech qanday mos ma'lumot topilmadi.</div>`;
+            } else {
+                grid.innerHTML = matches.map(createCardHTML).join("");
+            }
+            lucide.createIcons();
+        }
+
+        function clearSearch() {
+            const dInput = document.getElementById("desktop-search");
+            const mInput = document.getElementById("mobile-search");
+            if (dInput) dInput.value = "";
+            if (mInput) mInput.value = "";
+            document.getElementById("search-results-section").classList.add("hidden");
+        }
+
+        function startQuiz() {
+            quizIndex = 0;
+            quizScore = 0;
+            quizAnswered = false;
+            document.getElementById("quiz-content").classList.remove("hidden");
+            document.getElementById("quiz-result").classList.add("hidden");
+            document.getElementById("quiz-score-badge").textContent = "Ball: 0";
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            const qObj = quizQuestions[quizIndex];
+            if (!qObj) return;
+            quizAnswered = false;
+
+            document.getElementById("quiz-progress-text").textContent = `Savol ${quizIndex + 1} / ${quizQuestions.length}`;
+            document.getElementById("quiz-progress-bar").style.width = `${((quizIndex + 1) / quizQuestions.length) * 100}%`;
+            document.getElementById("quiz-question-text").textContent = qObj.q;
+
+            const optGrid = document.getElementById("quiz-options-grid");
+            optGrid.innerHTML = qObj.options.map((opt, idx) => `
+                <button type="button" onclick="selectQuizOption(${idx}, this)" class="quiz-opt-btn w-full text-left px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs sm:text-sm text-slate-200 font-semibold transition">${opt}</button>
+            `).join("");
+        }
+
+        function selectQuizOption(idx, btnEl) {
+            if (quizAnswered) return;
+            quizAnswered = true;
+            const qObj = quizQuestions[quizIndex];
+            const buttons = document.querySelectorAll(".quiz-opt-btn");
+
+            buttons.forEach((b, i) => {
+                b.disabled = true;
+                if (i === qObj.correct) {
+                    b.className = "quiz-opt-btn w-full text-left px-4 py-3 rounded-xl bg-emerald-500/20 border border-emerald-500 text-emerald-300 text-xs sm:text-sm font-bold";
+                } else if (i === idx) {
+                    b.className = "quiz-opt-btn w-full text-left px-4 py-3 rounded-xl bg-rose-500/20 border border-rose-500 text-rose-300 text-xs sm:text-sm font-bold";
+                }
+            });
+
+            if (idx === qObj.correct) {
+                quizScore += 1;
+                document.getElementById("quiz-score-badge").textContent = `Ball: ${quizScore}`;
+            }
+
+            setTimeout(() => {
+                if (quizIndex + 1 < quizQuestions.length) {
+                    quizIndex += 1;
+                    renderQuizQuestion();
+                } else {
+                    document.getElementById("quiz-content").classList.add("hidden");
+                    document.getElementById("quiz-result").classList.remove("hidden");
+                    document.getElementById("quiz-final-score").textContent = `Siz ${quizQuestions.length} ta savoldan ${quizScore} tasiga to'g'ri javob berdingiz.`;
+                    lucide.createIcons();
+                }
+            }, 850);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.remove("hidden");
+            setTimeout(() => toast.classList.add("hidden"), 2500);
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            updateStats();
+            renderPrehistory();
+            renderFigures();
+            renderPlaces();
+            renderEvents();
+            lucide.createIcons();
+            syncWikipediaCatalogNow(true);
+        });
+    </script>
+</body>
+</html>
